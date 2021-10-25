@@ -1,0 +1,17 @@
+.main--articles-list {
+    min-height: 84vh;
+    padding-top: 10px;
+}
+
+.main--articles-list .wrap {
+    width: 1150px;
+}
+
+.searchingTag  {
+    margin-bottom: 10px;
+}
+
+.main--articles-list .cards {
+    margin-top: 27px;
+    gap: 23px;
+}

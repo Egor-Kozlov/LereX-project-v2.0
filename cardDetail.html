@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card</title>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- styles -->
+    <link rel="stylesheet" href="./src/styles/main.css">
+    <link rel="stylesheet" href="./src/styles/cardDetail.css">
+    <!-- scripts -->
+    <script src="./src/data.js" defer></script>
+    <script src="./src/scripts/cardDetail.js" defer></script>
+</head>
+<body>
+    <!-- start header -->
+    <header class="header">
+        <div class="wrap">
+            <div class="logo">
+                <a class="logo__link" href="index.html"></a>
+            </div>
+            <a class="btn-signin" href="#">
+                <span class="btn-signin__body">Sign In</span>
+            </a>
+        </div>
+    </header>
+    <!-- end header -->
+    <!-- start main -->
+    <main class="main main--card">
+        <div class="wrap">
+            <article class="article"></article>
+            <div class="article-info"></div>
+            <div class="tags">
+                <ul class="tags__list"></ul>
+            </div>
+        </div>
+    </main>
+    <!-- end main -->
+     <!-- start footer -->
+     <footer class="footer">
+        <div class="wrap">
+            <div class="rights">2021 © LeverX, Int. All Rights Reserved.</div>
+            <div class="social">
+                <ul class="social__list">
+                    <li class="social__item social__item--facebook">
+                        <a class="social__link" href="https://www.facebook.com/leverxint/"></a>
+                    </li>
+                    <li class="social__item social__item--instagram">
+                        <a class="social__link" href="https://www.instagram.com/leverx_stream/?hl=ru"></a>
+                    </li>
+                    <li class="social__item social__item--telegram">
+                        <a class="social__link" href="https://leverxpeople.by/"></a>
+                    </li>
+                </ul>
+                <div class="support">
+                    <a class="support__link" href="https://leverxpeople.by">Support</a>
+                </div>    
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- start article header template -->
+    <template id="article-header-template">
+        <div class="article__header">
+            <img class="article__img" src="./src/img/backgrounds/cards/card-background-1.png" alt="article barckground">
+            <h3 class="article__title">Top 15 Features of Angular </h3>
+        </div>
+    </template>
+    <!-- end article header template -->
+    <!-- start article story template -->
+    <template id="article-story-template">
+        <div class="article__story">
+            <h4 class="article__subtitle">Addition of Dependency Injection</h4>
+            <p class="article__body">
+                It has added the information for the dependency and also regarding the ng-content selections for the data. It helps in wrapping the ng content selections and can help in checking files by creating scripts and using various interfaces. This would help us provide additional data that can be used in tools like Angular language services, which offers the functionality to offer suggestions and hints for the components or methods pre-defined in built-in libraries.
+            </p>
+        </div>
+    </template>
+    <!-- end article story template -->
+    <!-- start article info template -->
+    <template id="article-info">
+        <span class="article-info__author">Adam Smith</span>
+        <span class="article-info__date">June 17, 2021</span>
+    </template>
+    <!-- end article info template -->
+    <!-- start tag template -->
+    <template id="tag-template">
+        <a class="tag__link" href="http://google.com">
+            <li class="tags__item">
+                <input class="tags__checkbox" type="checkbox">
+                <label class="tags__label">react</label>
+            </li>
+        </a>
+    </template>
+    <!-- end tag template -->
+</body>
+</html>

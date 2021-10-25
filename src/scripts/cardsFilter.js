@@ -1,33 +1,33 @@
 'use strict'
 const cardsData = data //<- "import" cards data from data.js
 
-let visibleCardsList = []
-let countCardsPerPage = cardsData.length >= 8 ? 8 : cardsData.length
+let inputSeachValue
+let filteredCard = data
+let countOfRenderedCards = 0
+const cardPerPage = 8
 
 const cardTemplate = document.getElementById('card-template') // <- pick card template from index.html
 const cardsContainer = document.querySelector('.cards') // <- pick cards container
-const moreCardsBtn = document.querySelector('.load-more-btn') // <- pick button show more
+const moreCardsBtn = document.querySelector('.load-more-btn')
 const searchInput = document.querySelector('.search-input')
 
 // pick card content
 let cardTitle = cardTemplate.content.querySelector('.card__title')
 let cardDescription = cardTemplate.content.querySelector('.card__description')
 let cardPicture = cardTemplate.content.querySelector('.card__img')
+let cardLink = cardTemplate.content.querySelector('.card__link')
+
 // pick tag content
 const tagsContainer = document.querySelector('.tags__list') //<- pick tag container
 const tagTemplate = document.getElementById('tag-template') //<- pick tag template
 let tagName = tagTemplate.content.querySelector('.tags__label') //<- pick tag label
 let tagInput = tagTemplate.content.querySelector('.tags__checkbox') //<- pick tag input
 
-const emptyResultTemplate = document.querySelector('.empty-result')
+const emptyResultTemplate = document.querySelector('.empty-result') //<- pick empty result container
 
 //prepare tags list
 const uniqueTagsList = [] //<- list of unique tags
 const stateChecboxesValue = {} //<- a list of user-selected tags
-
-moreCardsBtn.addEventListener('click', () => {
-
-})
 
 const createTagList = () => {
     for (const card of cardsData) {
@@ -38,8 +38,6 @@ const createTagList = () => {
         })
     }
 }
-
-createTagList()
 
 const tagsRender = (tagList) => { //<- render actual tags per page
     for (const tagData of tagList) {
@@ -52,15 +50,11 @@ const tagsRender = (tagList) => { //<- render actual tags per page
     }
 }
 
-tagsRender(uniqueTagsList)
-
 const createStateCheckboxes = () => { //<- create object with all tags that cards object include 
     for (const tag of uniqueTagsList) {
         stateChecboxesValue[tag] = false
     }
 }
-
-createStateCheckboxes()
 
 const onChangeStateChecboxes = (value) => { //<- change boolean value state in "stateChecboxesValue" after click
     stateChecboxesValue[value] = !stateChecboxesValue[value]
@@ -78,7 +72,7 @@ const getTrueTag = () => { //<- get list of true tags
 }
 
 //input search value
-let inputSeachValue
+
 searchInput.oninput = function() {
     inputSeachValue = searchInput.value
     filterCardList(searchInput.value)
@@ -88,8 +82,9 @@ const createCard = (cards) => {
     const cardsTemplate = cards.map((card, index) => {
         cardPicture.setAttribute('src', `${card.picture}`)
         cardTitle.textContent = `${card.title}` // <- pick title from cardsData
-        cardDescription.textContent = `${card.description}` // <- pick description from cardsData
-        cardDescription.setAttribute('title', `${cardsData[index].description}`)
+        cardDescription.textContent = `${card.articleBody[0].storyParagraph}` // <- pick description from cardsData
+        cardDescription.setAttribute('title', `${cardsData[index].articleBody[0].storyParagraph}`)
+        cardLink.setAttribute('href', `cardDetail.html?id=${card._id}`)
         return cardTemplate.content.cloneNode(true); 
     })
     return cardsTemplate
@@ -97,14 +92,35 @@ const createCard = (cards) => {
 
 const renderCards = (cardsTemplate) => {
     cardsContainer.innerHTML = ''
-    cardsTemplate.length ? cardsTemplate.forEach(element => {
-        cardsContainer.append(element) 
-    }) : cardsContainer.append(emptyResultTemplate.content.cloneNode(true))
+    if (cardsTemplate.length < cardPerPage) {
+        cardsTemplate.length ? cardsTemplate.forEach(element => {
+            cardsContainer.append(element) 
+        }) : cardsContainer.append(emptyResultTemplate.content.cloneNode(true))
+        countOfRenderedCards = cardsTemplate.length
+        setVisibilityLoadMoreBtn(false)
+    } else {
+        let maxCount = cardPerPage + countOfRenderedCards > cardsTemplate.length ? cardsTemplate.length : cardPerPage + countOfRenderedCards
+        for (let index = 0; index < maxCount; index++) {
+            cardsContainer.append(cardsTemplate[index])
+        }
+        countOfRenderedCards = maxCount
+        setVisibilityLoadMoreBtn(true)
+    }
+    if (countOfRenderedCards == cardsTemplate.length) {
+        setVisibilityLoadMoreBtn(false)
+    }
+}
+
+const setVisibilityLoadMoreBtn = (isVisible) => {
+    if (isVisible) {
+        moreCardsBtn.style.visibility = 'visible'
+    } else {
+        moreCardsBtn.style.visibility = 'hidden'
+    }
 }
 
 const filterCardList = () => {
     const trueTag = getTrueTag()
-    let filteredCard = []
 
     if (trueTag.length && inputSeachValue) { // <-if user pick some tags and use input search together
         filteredCard = cardsData.filter((card) => {
@@ -127,8 +143,19 @@ const filterCardList = () => {
     } else { // <-if user pick nothing
         filteredCard = cardsData
     }
-
+    countOfRenderedCards = 0
     renderCards(createCard(filteredCard))
 }
 
-filterCardList()
+moreCardsBtn.addEventListener('click', () => {
+    renderCards(createCard(filteredCard))
+})
+
+const firstRenderCads = () => {
+    createTagList()
+    tagsRender(uniqueTagsList)
+    createStateCheckboxes()
+    renderCards(createCard(filteredCard))
+}
+
+firstRenderCads()

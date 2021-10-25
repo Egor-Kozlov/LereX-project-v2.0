@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles List</title>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- styles -->
+    <link rel="stylesheet" href="./src/styles/main.css">
+    <link rel="stylesheet" href="./src/styles/listArticlesByTag.css">
+    <!-- scripts -->
+    <script src="./src/data.js" defer></script>
+    <script src="./src/scripts/listArticlesByTag.js" defer></script>
+</head>
+<body>
+    <!-- start header -->
+    <header class="header">
+        <div class="wrap">
+            <div class="logo">
+                <a class="logo__link" href="index.html"></a>
+            </div>
+            <a class="btn-signin" href="#">
+                <span class="btn-signin__body">Sign In</span>
+            </a>
+        </div>
+    </header>
+    <!-- end header -->
+    <!-- start main -->
+    <main class="main main--articles-list">
+        <div class="wrap">
+            <h4 class="searchingTag main__title">Searching by tag : <span class="tagName"></span></h4>
+            <input id="searchInput" class="search-input" type="text" placeholder="Search for artile">
+            <div class="cards"></div>
+        </div>
+    </main>
+    <!-- end main -->
+     <!-- start footer -->
+     <footer class="footer">
+        <div class="wrap">
+            <div class="rights">2021 © LeverX, Int. All Rights Reserved.</div>
+            <div class="social">
+                <ul class="social__list">
+                    <li class="social__item social__item--facebook">
+                        <a class="social__link" href="https://www.facebook.com/leverxint/"></a>
+                    </li>
+                    <li class="social__item social__item--instagram">
+                        <a class="social__link" href="https://www.instagram.com/leverx_stream/?hl=ru"></a>
+                    </li>
+                    <li class="social__item social__item--telegram">
+                        <a class="social__link" href="https://leverxpeople.by/"></a>
+                    </li>
+                </ul>
+                <div class="support">
+                    <a class="support__link" href="https://leverxpeople.by">Support</a>
+                </div>    
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+    <!-- start card template -->
+    <template id="card-template">
+        <div class="card">
+            <a class="card__link">
+            <img class="card__img" alt="card barckground">
+            <div class="card__body">
+                <h4 class="card__title"></h4>
+                <p class="card__description"></p>
+            </div>
+            </a>
+        </div>
+    </template>
+    <!-- end card template -->
+     <!-- start message empty-result template -->
+     <template class="empty-result">
+        <p class="empty-result__text">There are no results matching your search :(</p>
+    </template>
+    <!-- end message empty-result template -->
+</body>
+</html>
