@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "server": "^1.0.36"
+  },
+  "scripts": {
+    "start": "node serverNode.js"
+  },
+  "name": "kazlou.yahor",
+  "description": "",
+  "version": "1.0.0",
+  "main": "./server/serverNode.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://edu-gitlab.leverx-group.com/october2021/kazlou.yahor.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,133 @@
+.article-form {
+    background: url(../img/backgrounds/form-create-article-background.svg) no-repeat center;
+    background-attachment: fixed;
+}
+
+.article-form__section {
+    display: flex;
+    flex-direction: column;
+}
+
+.article-form__input--image {
+    height: 116px;
+    margin-bottom: 62px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #2F80ED;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.article-form__label {
+    margin-bottom: 24px;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+    letter-spacing: 0.0075em;
+    color: #333333;
+}
+
+.article-form__input {
+    width: 100%;
+    padding: 0px 32px;
+    margin-bottom: 44px;
+    border: 1px solid #2F80ED;
+    border-radius: 4px;
+    background: none;
+    color: #333333;
+}
+
+.article-form__input--title {
+    height: 72px;
+    padding-top: 6px;
+
+    font-weight: bold;
+    font-size: 42px;
+    line-height: 56px;
+    letter-spacing: -0.005em;
+}
+
+.article-form__input--subtitle {
+    height: 56px;
+    padding-top: 4px;
+
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 132%;
+}
+
+.article-form__input--textarea {
+    height: 288px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.0168em;
+    color: #4F4F4F;
+    resize: none;
+}
+
+.article-form__input::placeholder {
+    font-weight: bold;
+    color: #828282;
+}
+
+.article-form__input:focus {
+    transition: 0.2s;
+    box-shadow: 0 2px 10px rgb(32 33 36 / 37%);
+}
+
+.article-form__input:focus::-webkit-input-placeholder {
+    text-indent: 1300px; 
+    transition: text-indent 0.2s ease;
+}
+
+.article-form__input--title::placeholder {
+    font-size: 42px;
+    line-height: 56px;
+    letter-spacing: -0.005em;
+}
+
+.article-form__input--subtitle::placeholder {
+    font-size: 24px;
+    line-height: 132%;
+    color: #828282;
+}
+
+.article__add-btn {
+    padding-left: 25px;
+    margin-bottom: 44px;
+    background: url(../img/icons/plus-icon.svg) no-repeat;
+    border: none;
+    text-align: right;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 142%;
+    letter-spacing: 0.005em;
+    color: #2F80ED;
+}
+
+.footer--form {
+    background: #FFFFFF;
+}
+
+.btn--form-publish {
+    border: none;
+}
+
+.footer--form .wrap {
+    justify-content: right;
+    gap: 26px;
+}
+
+.btn--form-cancel {
+    background: none;
+    border: 1px solid #F2C94C;
+    color: #FFC513;
+}
+
+.btn--form-cancel:hover {
+    background: #F2C94C;
+    color: #333333;
+}

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form create article</title>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Open+Sans&display=swap"
+        rel="stylesheet">
+    <!-- styles -->
+    <link rel="stylesheet" href="./src/styles/main.css">
+    <link rel="stylesheet" href="./src/styles/formCreateAtricle.css">
+    <!-- scripts -->
+    <script src="./src/scripts/formCreatingArticle.js" defer></script>
+    <script src="./src/scripts/modules/isUserLogged.js" defer></script>
+</head>
+<body>
+    <div class="content">
+        <!-- start header -->
+        <header class="header">
+            <div class="wrap">
+                <div class="logo">
+                    <a class="logo__link" href="index.html"></a>
+                </div>
+                <nav class="nav">
+                </nav>
+            </div>
+        </header>
+        <!-- end header -->
+        <!-- start main -->
+        <main class="main">
+            <div class="wrap">
+                <form class="article-form">
+                    <div class="article-form__section">
+                        <div class="article-form__input--image">
+                            <input id="img-btn" onchange="imageUploaded()" type="file" name="" 
+                            accept="image/gif, image/jpeg, image/png">
+                        </div>
+                    </div>
+                    <div class="article-form__section">
+                        <label class="article-form__label article-form__label--title"
+                            for="article-form__input--title">Enter the title of your article
+                        </label>
+                        <input pattern="^[A-Za-zА-Яа-яЁё]{3,40}$" required type="text" class="article-form__input article-form__input--title"
+                         name="articleTitle" placeholder="Enter Title">
+                    </div>
+                    <div class="article-form__section">
+                        <label class="article-form__label article-form__label--subtitle"
+                            for="article-form__input--subtitle">Enter the subtitle of your article
+                        </label>
+                        <input pattern="^[A-Za-zА-Яа-яЁё]{3,40}$" required type="text" class="article-form__input article-form__input--subtitle"
+                             name="articleSubtitle/id:1" placeholder="Enter Subtitle">
+                    </div>
+                    <div class="article-form__section">
+                        <label class="article-form__label article-form__label--textarea"
+                            for="article-form__input--textarea">Tell your story...
+                        </label>
+                        <textarea pattern="^[A-Za-zА-Яа-яЁё]{3,150}$" required class="article-form__input article-form__input--textarea" name="articleTextarea/id:1"
+                             cols="30" rows="10">
+                        </textarea>
+                    </div>
+                    <div class="article-form__container">
+                    </div>
+                    <button type="button" class="article__add-btn">Add new block</button> 
+                    <div class="tags">
+                        <label class="article-form__label article-form__label--textarea"
+                            for="tags__list">Add tag information
+                        </label>
+                        <ul class="tags__list"></ul>
+                    </div>
+            </div>
+        </main>
+    </div>
+    <!-- end main -->
+    <!-- start footer -->
+    <footer class="footer footer--form">
+        <div class="wrap">
+            <button class="btn btn--form-cancel" href="index.html">Cancel</button>
+            <button class="btn btn--form-publish" type="submit">Publish</button>
+        </div>
+    </footer>
+    </form>
+    <!-- end footer -->
+    <!-- start story-block template -->
+    <template id="story-block-teamplate">
+        <div class="article-form__group">
+            <div class="article-form__section">
+                <label class="article-form__label article-form__label--subtitle"
+                    for="article-form__input--subtitle">Enter the subtitle of your article</label>
+                <input pattern="^[A-Za-zА-Яа-яЁё]{3,150}$" type="text" class="article-form__input article-form__input--subtitle"
+                    name="article-subtitle" placeholder="Enter Subtitle">
+            </div>
+            <div class="article-form__section">
+                <label class="article-form__label article-form__label--textarea"
+                    for="article-form__input--textarea">Tell your story...</label>
+                <textarea pattern="^[A-Za-zА-Яа-яЁё]{3,150}$" class="article-form__input article-form__input--textarea" name="article-textarea"
+                    cols="30" rows="10"></textarea>
+            </div>
+        </div>
+    </template>
+    <!-- end story-block template -->
+        <!-- start user is logged template -->
+        <template id="user-logged-template">
+            <a onclick="logOut()" id="logout" class="btn-create-post">
+                <span class="btn-create-post__body">Log Out</span>
+            </a>
+            <a class="btn-create-post" href="formCreateArticle.html">
+                <span class="btn-create-post__body">Create a Post</span>
+            </a>
+            <img class="nav__avatar" src="./src/img/backgrounds/avatar.png" alt="avatar">
+        </template>    
+        <!-- end user is logged template -->
+        <!-- start user isn't logged template -->
+        <template id="user-no-logged-template">
+            <a class="btn-create-post" href="./loginPage.html">
+                <span class="btn-create-post__body">Sign in</span>
+            </a>
+        </template>
+        <!-- end user isn't logged template -->
+         <!-- start tag template -->
+        <template id="tag-template">
+            <li class="tags__item">
+                <input class="tags__checkbox" type="checkbox">
+                <label class="tags__label">react</label>
+            </li>
+        </template>
+        <!-- end tag template -->
+</body>
+</html>

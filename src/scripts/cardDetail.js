@@ -1,20 +1,5 @@
 'use strict'
-const cardsData = data //<- "import" cards data from data.js
-
-const MONTHS = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-]
+const cardsData =[] //<- "import" cards data from data.js
 
 const params = new URLSearchParams(document.location.search.substring(1));
 const cardID = params.get("id"); //<-get card id
@@ -42,24 +27,21 @@ let tagLink = tagTemplate.content.querySelector('.tag__link')//<- pick tag link
 let tagName = tagTemplate.content.querySelector('.tags__label') //<- pick tag label
 
 //formating date
-const createDate = (date) => { 
-    const year = date.getFullYear()
-    const day = date.getDate()
-    const monthIndex = date.getMonth()
-    const monthName = MONTHS[monthIndex]
-    return `${monthName} ${day}, ${year}`
+const createDate = (date) => {
+    const options = {year: 'numeric', month: 'long', day: 'numeric'}
+    return date.toLocaleDateString('en-EN', options)
 }
 
-const createArticle = (cardID) => {
-    const articleData = cardsData.find(card => card._id === cardID) //<-find our article
+const createArticle = (cardList ,cardID) => {
+    const articleData = cardList.find(card => card._id === cardID) //<-find our article
     //create article header
     articleTitle.textContent = `${articleData.title}`
     document.title = `${articleData.title}` //<- set page title
-    articleImg.setAttribute('src', `${articleData.picture}`)
+    articleImg.setAttribute('src', `data:image/png;base64,${articleData.picture}`)
     articleContainer.append(articleHeaderTemplate.content.cloneNode(true))
 
     //create article story blocks
-    articleData.articleBody.map(storyData => {
+    articleData.articleBody.forEach(storyData => {
         articleSubtitle.textContent = `${storyData.storyTitle}`
         articleBody.textContent = `${storyData.storyParagraph}`
         articleContainer.append(articleStoryTemplate.content.cloneNode(true))
@@ -71,7 +53,7 @@ const createArticle = (cardID) => {
     articleInfoContainer.append(articleInfoTeamplate.content.cloneNode(true))
 
     //create article tag list
-    articleData.tags.map(tag => {
+    articleData.tags.forEach(tag => {
         tagLink.setAttribute('href', `listArticlesByTag.html?id=${tag}`)
         tagName.textContent = `${tag}`
         tagsContainer.append(tagTemplate.content.cloneNode(true))
@@ -79,4 +61,13 @@ const createArticle = (cardID) => {
 
 }
 
-createArticle(cardID)
+const getCards = (inputSearch, selectedTags) => {
+
+    let url = new URL ('http://localhost:8080/cardlist')
+    url.search = new URLSearchParams(params).toString();
+
+    fetch(url)
+    .then(response => response.json())
+    .then(json => createArticle(json ,cardID))
+}
+getCards()

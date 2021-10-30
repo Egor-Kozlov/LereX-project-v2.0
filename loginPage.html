@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeverX Project</title>
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Open+Sans&display=swap" rel="stylesheet">
+    <!-- styles -->
+    <link rel="stylesheet" href="./src/styles/main.css">
+    <link rel="stylesheet" href="./src/styles/loginPage.css">
+    <!-- scripts -->
+    <script src="./src/scripts/login.js" defer></script>
+</head>
+<body>
+    <div class="content">
+        <!-- start header -->
+        <header class="header">
+            <div class="wrap">
+                <div class="logo">
+                    <a class="logo__link" href="index.html"></a>
+                </div>
+                <nav class="nav">
+                </nav>
+            </div>
+        </header>
+        <!-- end header -->
+        <!-- start main -->
+        <main class="main main--login">
+            <div class="wrap">
+                <h2 class="login__title">Welcome to course<span class="login__welcome"></span></h2>
+                <form class="login__form">
+                    <input required class="login__input" type="text" placeholder="Login" value="" name="login">
+                    <input required class="login__input" type="password" placeholder="Password" value="" name="password">
+                    <button class="btn" type="submit" value="Login" id="login">Login</button>
+                    <!-- <input type="hidden" name="_csrf" value="{{csrf}}"> -->
+                </form>
+            </div>
+        </main>
+    </div>
+    <!-- end main -->
+    <!-- start footer -->
+    <footer class="footer">
+        <div class="wrap">
+            <div class="rights">2021 © LeverX, Int. All Rights Reserved.</div>
+            <div class="social">
+                <ul class="social__list">
+                    <li class="social__item social__item--facebook">
+                        <a class="social__link" href="https://www.facebook.com/leverxint/"></a>
+                    </li>
+                    <li class="social__item social__item--instagram">
+                        <a class="social__link" href="https://www.instagram.com/leverx_stream/?hl=ru"></a>
+                    </li>
+                    <li class="social__item social__item--telegram">
+                        <a class="social__link" href="https://leverxpeople.by/"></a>
+                    </li>
+                </ul>
+                <div class="support">
+                    <a class="support__link" href="https://leverxpeople.by">Support</a>
+                </div>    
+            </div>
+        </div>
+    </footer>
+    <!-- end footer -->
+     <!-- start user don't exist message template -->
+     <template id="user-no-logged-template">
+        <p class="login__no-user">User doesn't exist</p>
+    </template>
+    <!-- end user don't exist message template -->
+</body>
+</html>

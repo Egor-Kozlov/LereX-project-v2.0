@@ -372,10 +372,16 @@ textarea {
     box-sizing: border-box;
 }
 
+html,
 body {
+  height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
     font-family: 'Lato', sans-serif;
     background: #F2F2F2;
-    min-width: 100%;
 }
 
 /*end global styles */
@@ -385,6 +391,10 @@ body {
     height: 100%;
     margin: 0 auto;
     /* border: 1px solid rosybrown; */
+}
+
+.content {
+    flex: 1 0 auto;
 }
 /* end wrap styles*/
 /* start header styles */
@@ -413,10 +423,17 @@ body {
     height: 100%;
 }
 
-.btn-signin {
+.nav {
+    display: flex;
+    gap: 32px;
+}
+
+.btn-signin,
+.btn-create-post {
     display: block;
     width: 133px;
     height: 48px;
+    cursor: pointer;
 
     display: flex;
     align-items: center;
@@ -427,12 +444,23 @@ body {
     text-decoration: none;
 }
 
-.btn-signin__body {
+.btn-create-post {
+    width: 190px;
+}
+
+.btn-signin__body,
+.btn-create-post__body {
     font-weight: bold;
     font-size: 16px;
     line-height: 150%;
     letter-spacing: 0.05em;
     color: #FFFFFF;
+}
+
+.nav__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
 }
 /* end header styles */
 /* start slider styles */
@@ -456,6 +484,7 @@ body {
     border: none;
     visibility: hidden;
     transition: 3s;
+    background: url(../img/icons/arrow-left-icon.svg);
 }
 
 .slider:hover .slider__arrow-btn {
@@ -465,13 +494,12 @@ body {
 .slider__arrow-btn--left {
     left: 27px;
     top: 279px;
-    background: url(../img/icons/arrow-left-icon.svg);
 } 
 
 .slider__arrow-btn--right {
     right: 27px;
     top: 279px;
-    background: url(../img/icons/arrow-right-icon.svg);
+    transform: rotate(0.5turn);
 }
 
 .slider__item {
@@ -529,10 +557,9 @@ body {
     color: #FFFFFF;
 }
 
-.slider__btn {
+.btn {
     width: 145px;
     height: 48px;
-    margin-left: 7px;
 
     display: flex;
     justify-content: center;
@@ -550,7 +577,11 @@ body {
     border-radius: 24px;
 }
 
-.slider__btn:hover {
+.btn--slider {
+    margin-left: 7px;
+}
+
+.btn:hover {
     transition: .3s;
     background: #FFC513;
 }
@@ -559,7 +590,6 @@ body {
 /* start main styles */
 .main {
     width: 100%;
-    min-height: 100%;
     padding-top: 70px;
     padding-bottom: 54px;
     background: #F2F2F2;
@@ -783,6 +813,7 @@ body {
 .footer {
     width: 100%;
     height: 80px;
+    flex: 0 0 auto;
     background: #333333;
 }
 

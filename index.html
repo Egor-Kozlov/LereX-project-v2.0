@@ -13,81 +13,84 @@
     <link rel="stylesheet" href="./src/styles/main.css">
     <!-- scripts -->
     <script src="./src/scripts/slider.js" defer></script>
-    <script src="./src/data.js" defer></script>
+    <!-- <script src="./src/data.js" defer></script> -->
+    <script src="./src/scripts/modules/isUserLogged.js" defer></script>
+    <script src="./src/scripts/modules/getTags.js" defer></script>
     <script src="./src/scripts/cardsFilter.js" defer></script>
 </head>
 <body>
-    <!-- start header -->
-    <header class="header">
-        <div class="wrap">
-            <div class="logo">
-                <a class="logo__link" href="index.html"></a>
+    <div class="content">
+        <!-- start header -->
+        <header class="header">
+            <div class="wrap">
+                <div class="logo">
+                    <a class="logo__link" href="index.html"></a>
+                </div>
+                <nav class="nav">
+                </nav>
             </div>
-            <a class="btn-signin" href="#">
-                <span class="btn-signin__body">Sign In</span>
-            </a>
+        </header>
+        <!-- end header -->
+        <!-- start slider -->
+        <div class="slider">
+            <button class="slider__arrow-btn slider__arrow-btn--left"></button>
+            <button class="slider__arrow-btn slider__arrow-btn--right"></button>
+            <div class="slider__list">
+                <div class="slider__item slider__item--black">
+                    <div class="slider__body">
+                        <h2 class="slider__subtitle">Free courses from</h2>
+                        <h1 class="slider__title">LEVERX GROUP</h1>
+                        <p class="slider__description">The profession of a programmer is one of the most demanded in the IT field today. Programming training 
+                            at LeverX Group is an excellent opportunity to gain 
+                            practical knowledge in the most relevant areas in this 
+                            area and build a successful  career in our company.
+                        </p>
+                        <a class="btn btn--slider" href="https://leverxpeople.by/">Start Now</a>
+                    </div>
+                    <div class="slider__img"></div>
+                </div>
+                <div class="slider__item slider__item__blue">
+                    <div class="slider__body">
+                        <h2 class="slider__subtitle">Free courses from</h2>
+                        <h1 class="slider__title">LEVERX GROUP</h1>
+                        <p class="slider__description">The profession of a programmer is one of the most demanded in the IT field today. Programming training 
+                            at LeverX Group is an excellent opportunity to gain 
+                            practical knowledge in the most relevant areas in this 
+                            area and build a successful  career in our company.
+                        </p>
+                        <a class="btn btn--slider" href="https://leverxpeople.by/">Start Now</a>
+                    </div>
+                </div>
+                <div class="slider__item slider__item__react">
+                    <div class="slider__body">
+                        <h2 class="slider__subtitle">Free courses from</h2>
+                        <h1 class="slider__title">LEVERX GROUP</h1>
+                        <p class="slider__description">The profession of a programmer is one of the most demanded in the IT field today. Programming training 
+                            at LeverX Group is an excellent opportunity to gain 
+                            practical knowledge in the most relevant areas in this 
+                            area and build a successful  career in our company.
+                        </p>
+                        <a class="btn btn--slider" href="https://leverxpeople.by/">Start Now</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    </header>
-    <!-- end header -->
-    <!-- start slider -->
-    <div class="slider">
-        <button class="slider__arrow-btn slider__arrow-btn--left"></button>
-        <button class="slider__arrow-btn slider__arrow-btn--right"></button>
-        <div class="slider__list">
-            <div class="slider__item slider__item--black">
-                <div class="slider__body">
-                    <h2 class="slider__subtitle">Free courses from</h2>
-                    <h1 class="slider__title">LEVERX GROUP</h1>
-                    <p class="slider__description">The profession of a programmer is one of the most demanded in the IT field today. Programming training 
-                        at LeverX Group is an excellent opportunity to gain 
-                        practical knowledge in the most relevant areas in this 
-                        area and build a successful  career in our company.
-                    </p>
-                    <a class="slider__btn" href="https://leverxpeople.by/">Start Now</a>
+        <!-- end slider -->
+        <!-- start main -->
+        <main class="main">
+            <div class="wrap">
+                <h3 class="main__title">Interesting articles by LeverX Group</h3>
+                <input id="searchInput" class="search-input" type="text" placeholder="Search for artile">
+                <div class="tags">
+                    <ul class="tags__list"></ul>
                 </div>
-                <div class="slider__img"></div>
-            </div>
-            <div class="slider__item slider__item__blue">
-                <div class="slider__body">
-                    <h2 class="slider__subtitle">Free courses from</h2>
-                    <h1 class="slider__title">LEVERX GROUP</h1>
-                    <p class="slider__description">The profession of a programmer is one of the most demanded in the IT field today. Programming training 
-                        at LeverX Group is an excellent opportunity to gain 
-                        practical knowledge in the most relevant areas in this 
-                        area and build a successful  career in our company.
-                    </p>
-                    <a class="slider__btn" href="https://leverxpeople.by/">Start Now</a>
+                <div class="cards"></div>
+                <div class="button-container">
+                    <button class="load-more-btn">Load more</button>
                 </div>
             </div>
-            <div class="slider__item slider__item__react">
-                <div class="slider__body">
-                    <h2 class="slider__subtitle">Free courses from</h2>
-                    <h1 class="slider__title">LEVERX GROUP</h1>
-                    <p class="slider__description">The profession of a programmer is one of the most demanded in the IT field today. Programming training 
-                        at LeverX Group is an excellent opportunity to gain 
-                        practical knowledge in the most relevant areas in this 
-                        area and build a successful  career in our company.
-                    </p>
-                    <a class="slider__btn" href="https://leverxpeople.by/">Start Now</a>
-                </div>
-            </div>
-        </div>
+        </main>
     </div>
-    <!-- end slider -->
-    <!-- start main -->
-    <main class="main">
-        <div class="wrap">
-            <h3 class="main__title">Interesting articles by LeverX Group</h3>
-            <input id="searchInput" class="search-input" type="text" placeholder="Search for artile">
-            <div class="tags">
-                <ul class="tags__list"></ul>
-            </div>
-            <div class="cards"></div>
-            <div class="button-container">
-                <button class="load-more-btn">Load more</button>
-            </div>
-        </div>
-    </main>
     <!-- end main -->
     <!-- start footer -->
     <footer class="footer">
@@ -138,5 +141,23 @@
         <p class="empty-result__text">There are no results matching your search :(</p>
     </template>
     <!-- end message empty-result template -->
+    <!-- start user is logged template -->
+    <template id="user-logged-template">
+        <a onclick="logOut()" id="logout" class="btn-create-post">
+            <span class="btn-create-post__body">Log Out</span>
+        </a>
+        <a class="btn-create-post" href="formCreateArticle.html">
+            <span class="btn-create-post__body">Create a Post</span>
+        </a>
+        <img class="nav__avatar" src="./src/img/backgrounds/avatar.png" alt="avatar">
+    </template>    
+    <!-- end user is logged template -->
+    <!-- start user isn't logged template -->
+    <template id="user-no-logged-template">
+        <a class="btn-create-post" href="./loginPage.html">
+            <span class="btn-create-post__body">Sign in</span>
+        </a>
+    </template>
+    <!-- end user isn't logged template -->
 </body>
 </html>

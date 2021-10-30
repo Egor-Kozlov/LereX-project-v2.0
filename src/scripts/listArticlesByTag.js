@@ -1,5 +1,5 @@
 'use strict'
-const cardsData = data //<- "import" cards data from data.js
+let cardsData = [] //<- "import" cards data from data.js
 
 const params = new URLSearchParams(document.location.search.substring(1));
 const tagName = params.get("id"); //<-get card id
@@ -25,15 +25,14 @@ searchInput.oninput = function() {
 }
 
 const createCard = (cards) => {
-    const cardsTemplate = cards.map((card, index) => {
-        cardPicture.setAttribute('src', `${card.picture}`)
+    return cards.map((card, index) => {
+        cardPicture.setAttribute('src', `data:image/png;base64,${card.picture}`)
         cardTitle.textContent = `${card.title}` // <- pick title from cardsData
         cardDescription.textContent = `${card.articleBody[0].storyParagraph}` // <- pick description from cardsData
         cardDescription.setAttribute('title', `${cardsData[index].articleBody[0].storyParagraph}`)
         cardLink.setAttribute('href', `cardDetail.html?id=${card._id}`)
         return cardTemplate.content.cloneNode(true); 
     })
-    return cardsTemplate
 }
 
 const renderCards = (cardsTemplate) => {
@@ -55,10 +54,21 @@ const filterCardList = (inputValue) => {
     renderCards(createCard(filteredCard))
 }
 
-const firstRenderCads = () => {
+const firstRenderCads = (cards) => {
+    cardsData = cards
+    cardsByTag = cards.filter((card) => card.tags.includes(tagName))
     searchingTag.textContent = `${tagName}`
+    document.title = `Articles List by ${tagName}` //<- set page title
     renderCards(createCard(cardsByTag))
 }
 
-cardsByTag = cardsData.filter((card) => card.tags.includes(tagName))
-firstRenderCads()
+const getCards = (inputSearch, selectedTags) => {
+
+    let url = new URL ('http://localhost:8080/cardlist')
+    url.search = new URLSearchParams(params).toString();
+
+    fetch(url)
+    .then(response => response.json())
+    .then(json => firstRenderCads(json))
+}
+getCards()

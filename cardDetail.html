@@ -15,30 +15,32 @@
     <!-- scripts -->
     <script src="./src/data.js" defer></script>
     <script src="./src/scripts/cardDetail.js" defer></script>
+    <script src="./src/scripts/modules/isUserLogged.js" defer></script>
 </head>
 <body>
-    <!-- start header -->
-    <header class="header">
-        <div class="wrap">
-            <div class="logo">
-                <a class="logo__link" href="index.html"></a>
+    <div class="content">
+        <!-- start header -->
+        <header class="header">
+            <div class="wrap">
+                <div class="logo">
+                    <a class="logo__link" href="index.html"></a>
+                </div>
+                <nav class="nav">
+                </nav>
             </div>
-            <a class="btn-signin" href="#">
-                <span class="btn-signin__body">Sign In</span>
-            </a>
-        </div>
-    </header>
-    <!-- end header -->
-    <!-- start main -->
-    <main class="main main--card">
-        <div class="wrap">
-            <article class="article"></article>
-            <div class="article-info"></div>
-            <div class="tags">
-                <ul class="tags__list"></ul>
+        </header>
+        <!-- end header -->
+        <!-- start main -->
+        <main class="main main--card">
+            <div class="wrap">
+                <article class="article"></article>
+                <div class="article-info"></div>
+                <div class="tags">
+                    <ul class="tags__list"></ul>
+                </div>
             </div>
-        </div>
-    </main>
+        </main>
+    </div>
     <!-- end main -->
      <!-- start footer -->
      <footer class="footer">
@@ -91,11 +93,28 @@
     <template id="tag-template">
         <a class="tag__link" href="http://google.com">
             <li class="tags__item">
-                <input class="tags__checkbox" type="checkbox">
                 <label class="tags__label">react</label>
             </li>
         </a>
     </template>
     <!-- end tag template -->
+        <!-- start user is logged template -->
+        <template id="user-logged-template">
+            <a onclick="logOut()" id="logout" class="btn-create-post">
+                <span class="btn-create-post__body">Log Out</span>
+            </a>
+            <a class="btn-create-post" href="formCreateArticle.html">
+                <span class="btn-create-post__body">Create a Post</span>
+            </a>
+            <img class="nav__avatar" src="./src/img/backgrounds/avatar.png" alt="avatar">
+        </template>    
+        <!-- end user is logged template -->
+        <!-- start user isn't logged template -->
+        <template id="user-no-logged-template">
+            <a class="btn-create-post" href="./loginPage.html">
+                <span class="btn-create-post__body">Sign in</span>
+            </a>
+        </template>
+        <!-- end user isn't logged template -->
 </body>
 </html>

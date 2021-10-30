@@ -1,8 +1,8 @@
 'use strict'
-const cardsData = data //<- "import" cards data from data.js
+// const cardsData = data //<- "import" cards data from data.js
 
 let inputSeachValue
-let filteredCard = data
+// let filteredCard = data
 let countOfRenderedCards = 0
 const cardPerPage = 8
 
@@ -26,18 +26,8 @@ let tagInput = tagTemplate.content.querySelector('.tags__checkbox') //<- pick ta
 const emptyResultTemplate = document.querySelector('.empty-result') //<- pick empty result container
 
 //prepare tags list
-const uniqueTagsList = [] //<- list of unique tags
+let uniqueTagsList = [] //<- list of unique tags
 const stateChecboxesValue = {} //<- a list of user-selected tags
-
-const createTagList = () => {
-    for (const card of cardsData) {
-        card.tags.map((tag) => {
-            if (!uniqueTagsList.includes(tag)) {
-                uniqueTagsList.push(tag)
-            }
-        })
-    }
-}
 
 const tagsRender = (tagList) => { //<- render actual tags per page
     for (const tagData of tagList) {
@@ -58,13 +48,13 @@ const createStateCheckboxes = () => { //<- create object with all tags that card
 
 const onChangeStateChecboxes = (value) => { //<- change boolean value state in "stateChecboxesValue" after click
     stateChecboxesValue[value] = !stateChecboxesValue[value]
-    filterCardList()
+    getCards()
 }
 
 const getTrueTag = () => { //<- get list of true tags
     const tagsArr = []
     for (const key in stateChecboxesValue) {
-        if (stateChecboxesValue[key] == true) {
+        if (stateChecboxesValue[key] === true) {
             tagsArr.push(key)
         }
     }
@@ -75,19 +65,19 @@ const getTrueTag = () => { //<- get list of true tags
 
 searchInput.oninput = function() {
     inputSeachValue = searchInput.value
-    filterCardList(searchInput.value)
+    getCards(searchInput.value)
 };
 
 const createCard = (cards) => {
-    const cardsTemplate = cards.map((card, index) => {
-        cardPicture.setAttribute('src', `${card.picture}`)
+    return cards.map((card, index) => {
+        
+        cardPicture.setAttribute('src', `data:image/png;base64, ${card.picture}`)
         cardTitle.textContent = `${card.title}` // <- pick title from cardsData
         cardDescription.textContent = `${card.articleBody[0].storyParagraph}` // <- pick description from cardsData
-        cardDescription.setAttribute('title', `${cardsData[index].articleBody[0].storyParagraph}`)
+        cardDescription.setAttribute('title', `${cards[index].articleBody[0].storyParagraph}`)
         cardLink.setAttribute('href', `cardDetail.html?id=${card._id}`)
         return cardTemplate.content.cloneNode(true); 
     })
-    return cardsTemplate
 }
 
 const renderCards = (cardsTemplate) => {
@@ -106,56 +96,52 @@ const renderCards = (cardsTemplate) => {
         countOfRenderedCards = maxCount
         setVisibilityLoadMoreBtn(true)
     }
-    if (countOfRenderedCards == cardsTemplate.length) {
+    if (countOfRenderedCards === cardsTemplate.length) {
         setVisibilityLoadMoreBtn(false)
     }
 }
 
 const setVisibilityLoadMoreBtn = (isVisible) => {
-    if (isVisible) {
-        moreCardsBtn.style.visibility = 'visible'
-    } else {
-        moreCardsBtn.style.visibility = 'hidden'
-    }
-}
-
-const filterCardList = () => {
-    const trueTag = getTrueTag()
-
-    if (trueTag.length && inputSeachValue) { // <-if user pick some tags and use input search together
-        filteredCard = cardsData.filter((card) => {
-            return card.tags.some((tagName) => {
-                return trueTag.includes(tagName)
-            })
-        }).filter((card) => {
-            return card.title.toLowerCase().includes(inputSeachValue.toLowerCase())
-        })
-    } else if (inputSeachValue) { // <-if user use input search 
-        filteredCard = cardsData.filter((card) => {
-            return card.title.toLowerCase().includes(inputSeachValue.toLowerCase())
-        })
-    } else if (trueTag.length) { // <-if user pick some tags
-        filteredCard = cardsData.filter((card) => {
-            return card.tags.some((tagName) => {
-                return trueTag.includes(tagName)
-            })
-        })
-    } else { // <-if user pick nothing
-        filteredCard = cardsData
-    }
-    countOfRenderedCards = 0
-    renderCards(createCard(filteredCard))
+    moreCardsBtn.style.visibility = isVisible ? 'visible' : 'hidden'
 }
 
 moreCardsBtn.addEventListener('click', () => {
     renderCards(createCard(filteredCard))
 })
 
+const getTagsList = () => {
+    fetch('http://localhost:8080/tag-list')
+    .then(response => response.json())
+    .then(json => {
+        tagsRender(json)
+        createStateCheckboxes()
+    })
+}
+
+const getCards = (inputSearch, selectedTags) => {
+    let selectedTagsString = ''
+    for (const key in stateChecboxesValue) {
+        if (Object.hasOwnProperty.call(stateChecboxesValue, key)) {
+            const element = stateChecboxesValue[key];
+            if (element) {
+                selectedTagsString += `${key}-`
+            }
+        }
+    }  
+
+    let url = new URL ('http://localhost:8080/cards')
+    var params = {inputSearch: inputSeachValue === undefined ? '' :inputSeachValue, selectedTags: selectedTagsString} 
+
+    url.search = new URLSearchParams(params).toString();
+
+    fetch(url)
+    .then(response => response.json())
+    .then(json => renderCards(createCard(json)))
+}
+
 const firstRenderCads = () => {
-    createTagList()
-    tagsRender(uniqueTagsList)
-    createStateCheckboxes()
-    renderCards(createCard(filteredCard))
+    getTagsList()
+    getCards() 
 }
 
 firstRenderCads()
